@@ -33,11 +33,24 @@ class hashing {
         }
     }
 
+    void update(int old_key, int new_key) {
+        int index = hashvalue(old_key);
+        for (auto it = hashtable[index].begin(); it != hashtable[index].end(); ++it) {
+            if (*it == old_key) {
+                *it = new_key;
+                cout << old_key << " updated to " << new_key << endl;
+                return;
+            }
+        }
+        cout << old_key << " not found, cannot update" << endl;
+    }
+    
+
     void display () {
         for (int i = 0; i < hashtable.size(); i++) {
             cout << "Bucket " << i << ": ";
-            for (int val : hashtable[i]) {
-                cout << val << " -> ";
+            for (int value : hashtable[i]) {
+                cout << value << " -> ";
             }
             cout << "NULL" << endl;
         }
@@ -53,6 +66,9 @@ int main() {
     h.add_key(27);
     h.add_key(7);
 
+    h.display();
+
+    h.update(27,37);
     h.display();
     return 0;
 }
